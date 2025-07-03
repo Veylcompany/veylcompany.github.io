@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veyl Paneli</title>
+  <style>
+    body {
+      background: radial-gradient(circle at center, #0b0c10 0%, #1a1a1a 100%), url('https://www.transparenttextures.com/patterns/black-felt.png');
+      background-size: cover;
+      color: #c5c6c7;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 50px;
+    }
+    .card {
+      width: 300px;
+      height: 200px;
+      margin: 100px auto;
+      background-color: #1f1f1f;
+      border: 2px solid gold;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: gold;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 15px gold;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #1f2833;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    .input {
+      margin: 10px;
+      padding: 10px;
+      width: 80%;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    .button {
+      margin: 20px;
+      padding: 12px 24px;
+      background-color: #66fcf1;
+      color: #0b0c10;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #45a29e;
+      color: white;
+    }
+    .hidden {
+      display: none;
+    }
+    .panel {
+      background-color: #4b0000 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" onclick="kartTiklandi()">
+    🃏 GİRİŞ KARTI — VEYL SYSTEM ⚜️<br>
+    <small style="margin-top:10px; font-weight: normal; font-size: 14px;">Cennete girmek için bile ölüm gerekir</small>
+  </div>
+
+  <div class="container hidden" id="girisEkrani">
+    <h1>Veyl Paneli Giriş</h1>
+    <p>Sihirli kelimeyi, adını ve doğum tarihini gir:</p>
+    <input class="input" id="keyword" placeholder="Sihirli Kelime (ör: archeron)"><br>
+    <input class="input" id="name" placeholder="Adın (ör: Elif)"><br>
+    <input class="input" id="birthdate" placeholder="Doğum Tarihi (20. 07. 1304)"><br>
+    <button class="button" onclick="kontrolEt()">Giriş Yap</button>
+  </div>
+
+  <div class="container hidden panel" id="panelEkrani">
+    <h1>Hoşgeldin, Sönmez</h1>
+    <p>Giriş başarılı. Lütfen bir görev seç:</p>
+    <a class="button" href="#gorev1">🕯️ Günlük Görevler</a>
+    <a class="button" href="#gorev2">🪽 Adanmış Görevler</a>
+    <a class="button" href="#gorev3">⚜️ Rütbe İlerlemesi</a>
+    <a class="button" href="#gorev4">🃏 Kuğuyarığı Günlüğü</a>
+    <br><br>
+    <button class="button" onclick="cikisYap()">Çıkış Yap</button>
+  </div>
+
+  <script>
+    function kartTiklandi() {
+      document.querySelector('.card').classList.add('hidden');
+      document.getElementById('girisEkrani').classList.remove('hidden');
+    }
+
+    function kontrolEt() {
+      const keyword = document.getElementById("keyword").value.trim().toLowerCase();
+      const name = document.getElementById("name").value.trim().toLowerCase();
+      const birthdate = document.getElementById("birthdate").value.trim();
+
+      if (keyword === "archeron" && name === "elif" && birthdate === "20. 07. 1304") {
+        document.getElementById("girisEkrani").classList.add("hidden");
+        document.getElementById("panelEkrani").classList.remove("hidden");
+        sessionStorage.setItem("giris", "ok");
+      } else {
+        alert("Bilgiler hatalı. Giriş reddedildi.");
+      }
+    }
+
+    function cikisYap() {
+      sessionStorage.clear();
+      location.reload();
+    }
+
+    window.onload = () => {
+      sessionStorage.clear(); // Her girişte tekrar giriş istensin
+    }
+  </script>
+</body>
+</html>
