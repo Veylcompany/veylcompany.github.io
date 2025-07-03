@@ -1,1 +1,0 @@
-VEYL Tapınak Panel Projesi - Dışa Aktarma Testi
